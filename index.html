@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Administration — Josué Bolombo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- Connexion -->
+<main id="loginView" class="login" hidden>
+  <form id="loginForm" class="card" novalidate>
+    <h1 class="small">Administration</h1>
+    <p class="note">Réservé à Josué Bolombo.</p>
+    <label>Email <input name="email" type="email" required autocomplete="username"></label>
+    <label>Mot de passe <input name="password" type="password" required autocomplete="current-password"></label>
+    <button class="btn" type="submit">Se connecter</button>
+    <p id="loginMsg" class="status" role="status"></p>
+  </form>
+</main>
+
+<!-- Tableau de bord -->
+<div id="appView" hidden>
+  <header class="top">
+    <div class="wrap bar">
+      <a class="logo" href="index.html" aria-label="Voir le site">JB</a>
+      <nav aria-label="Administration">
+        <button class="tab" data-tab="films" aria-selected="true">Films</button>
+        <button class="tab" data-tab="articles" aria-selected="false">Écrits</button>
+        <button class="tab" data-tab="messages" aria-selected="false">Messages</button>
+        <button class="tab out" id="logout">Déconnexion</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap panel">
+    <!-- Films -->
+    <section id="tab-films" class="pane">
+      <h2>Films</h2>
+      <form id="filmForm" class="card" novalidate>
+        <input type="hidden" name="id">
+        <label>Titre <input name="titre" required maxlength="150"></label>
+        <div class="grid2">
+          <label>Année <input name="annee" type="number" min="1900" max="2100"></label>
+          <label>Statut
+            <select name="statut">
+              <option value="sorti">Sorti</option>
+              <option value="bientôt disponible">Bientôt disponible</option>
+              <option value="en préparation">En préparation</option>
+            </select>
+          </label>
+        </div>
+        <label>Description <textarea name="description" maxlength="600"></textarea></label>
+        <label>Lien du film (YouTube, etc.) <input name="lien" type="url" placeholder="https://"></label>
+        <label>Affiche (JPG, PNG ou WebP, 5 Mo max) <input name="affiche" type="file" accept="image/jpeg,image/png,image/webp"></label>
+        <label class="check"><input name="publie" type="checkbox" checked> Visible sur le site</label>
+        <div class="actions">
+          <button class="btn" type="submit">Enregistrer le film</button>
+          <button class="btn ghost" type="button" data-reset="filmForm">Nouveau</button>
+        </div>
+        <p id="filmMsg" class="status" role="status"></p>
+      </form>
+      <div id="filmsAdmin" class="items"></div>
+    </section>
+
+    <!-- Écrits -->
+    <section id="tab-articles" class="pane" hidden>
+      <h2>Scénarios et articles</h2>
+      <form id="articleForm" class="card" novalidate>
+        <input type="hidden" name="id">
+        <label>Titre <input name="titre" required maxlength="150"></label>
+        <label>Type
+          <select name="type">
+            <option value="scenario">Scénario</option>
+            <option value="article">Article</option>
+          </select>
+        </label>
+        <label>Résumé <textarea name="resume" maxlength="400" style="min-height:80px"></textarea></label>
+        <label>Texte complet <textarea name="contenu" class="long"></textarea></label>
+        <label class="check"><input name="publie" type="checkbox"> Publier sur le site (sinon brouillon)</label>
+        <div class="actions">
+          <button class="btn" type="submit">Enregistrer le texte</button>
+          <button class="btn ghost" type="button" data-reset="articleForm">Nouveau</button>
+        </div>
+        <p id="articleMsg" class="status" role="status"></p>
+      </form>
+      <div id="articlesAdmin" class="items"></div>
+    </section>
+
+    <!-- Messages -->
+    <section id="tab-messages" class="pane" hidden>
+      <h2>Messages reçus</h2>
+      <div id="messagesAdmin" class="items"></div>
+    </section>
+  </main>
+</div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
